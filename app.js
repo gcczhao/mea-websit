@@ -25,6 +25,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
+
+// 网站首页接受 POST 请求
+app.post('/contactus', function (req, res) {
+  res.send('Got a POST request');
+  console.log(req.body.EMAIL);
+  console.log(req.body.FNAME);
+  console.log(req.body.LNAME);
+  console.log(req.body.MMERGE3);
+
+  var exec = require('child_process').exec;
+  var cmdStr = 'mail -s "'+req.body.FNAME+"-"+req.body.LNAME+'" service@my-eyecare.com <<< "'+req.body.MMERGE3+req.body.EMAIL+'" ';
+  exec(cmdStr, function(err,stdout,stderr){
+    if(err) {
+      console.log('mail to contactus fail:'+stderr);
+    } else {
+      console.log('mail to contactus success');
+    }
+  });
+
+});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
