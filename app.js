@@ -36,6 +36,7 @@ app.post('/contactus', function (req, res) {
 
   var exec = require('child_process').exec;
   var cmdStr = 'mail -s "'+req.body.FNAME+"-"+req.body.LNAME+'" service@my-eyecare.com <<< "'+req.body.MMERGE3+req.body.EMAIL+'" ';
+  console.log(cmdStr);
   exec(cmdStr, function(err,stdout,stderr){
     if(err) {
       console.log('mail to contactus fail:'+stderr);
