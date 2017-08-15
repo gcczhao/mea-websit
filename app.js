@@ -28,19 +28,28 @@ app.use('/users', users);
 
 // 网站首页接受 POST 请求
 app.post('/contactus', function (req, res) {
-  res.send('Got a POST request');
   console.log(req.body.EMAIL);
   console.log(req.body.FNAME);
   console.log(req.body.LNAME);
   console.log(req.body.MMERGE3);
-
-  var exec = require('child_process').exec;
   var cmdStr = 'mail -s "'+req.body.FNAME+"-"+req.body.LNAME+'" service@my-eyecare.com <<< "'+req.body.MMERGE3+req.body.EMAIL+'" ';
   console.log(cmdStr);
-  exec(cmdStr, function(err,stdout,stderr){
+
+  var temp = process.env,
+      environment = {};
+  environment.PATH = temp.PATH+":/usr/local/node/bin";
+  var option = {
+    env: environment,
+    shell: "/bin/bash",
+  }
+
+  var exec = require('child_process').exec;
+  exec(cmdStr, option, function(err,stdout,stderr){
     if(err) {
+      res.send('Got a POST request');
       console.log('mail to contactus fail:'+stderr);
     } else {
+      res.send('Got a POST request');
       console.log('mail to contactus success');
     }
   });
