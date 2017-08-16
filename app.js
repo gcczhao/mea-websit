@@ -32,7 +32,7 @@ app.post('/contactus', function (req, res) {
   console.log(req.body.FNAME);
   console.log(req.body.LNAME);
   console.log(req.body.MMERGE3);
-  var cmdStr = 'mail -s "'+req.body.FNAME+"-"+req.body.LNAME+'" service@my-eyecare.com <<< "Message:  '+req.body.MMERGE3+'    Firstname: '+req.body.FNAME+'  Lastname:'+req.body.LNAME+'   Email: '+req.body.EMAIL+'" ';
+  var cmdStr = 'mail -s "Contact Us Form" service@my-eyecare.com <<< "Message:  '+req.body.MMERGE3+'    Firstname: '+req.body.FNAME+'  Lastname:'+req.body.LNAME+'   Email: '+req.body.EMAIL+'" ';
 
   console.log(cmdStr);
 
