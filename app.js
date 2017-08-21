@@ -57,6 +57,78 @@ app.post('/contactus', function (req, res) {
 
 });
 
+// 网站注册POST 请求
+app.post('/register', function (req, res) {
+  console.log(req.body.email);
+  console.log(req.body.password);
+
+  AWSCognito.config.region = 'us-west-2'; //This is required to derive the endpoint
+  var poolData = {
+    UserPoolId : 'us-west-2_Fojm1h58P',
+    ClientId : '74odl2a2sbqmfckafmrpfh1c8t'
+  };
+  var userPool = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserPool(poolData);
+
+  var attributeList = [];
+
+  var dataEmail = {
+    Name : 'email',
+    Value : 'email@mydomain.com'
+  };
+  var dataPhoneNumber = {
+    Name : 'phone_number',
+    Value : '+15555555555'
+  };
+  var attributeEmail = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserAttribute(dataEmail);
+  var attributePhoneNumber = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserAttribute(dataPhoneNumber);
+
+  attributeList.push(attributeEmail);
+  attributeList.push(attributePhoneNumber);
+
+  userPool.signUp('username', 'password', attributeList, null, function(err, result){
+    if (err) {
+      alert(err);
+      return;
+    }
+    cognitoUser = result.user;n
+    console.log('user name is ' + cognitoUser.getUsername());
+  });
+
+});
+
+// 网站登陆 POST 请求
+app.post('/logon', function (req, res) {
+  console.log(req.body.email);
+  console.log(req.body.password);
+
+  var authenticationData = {
+    Username : 'username',
+    Password : 'password',
+  };
+  var authenticationDetails = new AWSCognito.CognitoIdentityServiceProvider.AuthenticationDetails(authenticationData);
+  var poolData = { UserPoolId : 'us-east-1_TcoKGbf7n',
+    ClientId : '4pe2usejqcdmhi0a25jp4b5sh3'
+  };
+  var userPool = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserPool(poolData);
+  var userData = {
+    Username : 'username',
+    Pool : userPool
+  };
+  var cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser(userData);
+  cognitoUser.authenticateUser(authenticationDetails, {
+    onSuccess: function (result) {
+      console.log('access token + ' + result.getAccessToken().getJwtToken());
+      /*Use the idToken for Logins Map when Federating User Pools with Cognito Identity or when passing through an Authorization Header to an API Gateway Authorizer*/
+      console.log('idToken + ' + result.idToken.jwtToken);
+    },
+
+    onFailure: function(err) {
+      alert(err);
+    },
+
+  });
+
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
