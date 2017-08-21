@@ -697,6 +697,15 @@
 
           <script>
             function contactusfunc() {
+
+              var reg = /(\S)+[@]{1}(\S)+[.]{1}(\w)+/; //正则表达式
+              var obj = $("#mce-EMAIL").val(); //要验证的对象
+              if(obj.length  == 0){ //输入不能为空
+                return false;
+              }else if(!reg.test(obj)){ //正则验证不通过，格式不对
+                return false;
+              }else{
+              }
               $.ajax({
                 type: 'post',
                 url: '/contactus',
