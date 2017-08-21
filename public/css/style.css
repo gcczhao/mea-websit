@@ -47,13 +47,13 @@ body {
 }
 
 a {
-  color: #FEC530;
+  color: #33CCCC;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
 }
 a:hover, a:active, a:focus {
-  color: #FEC530;
+  color: #33CCCC;
   outline: none;
   text-decoration: none;
 }
@@ -277,7 +277,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 #fh5co-hero {
-  min-height: 650px;
+  min-height: 550px;
   background: #fff url(../images/loader.gif) no-repeat center center;
 }
 #fh5co-hero .flexslider {
@@ -293,7 +293,7 @@ h1, h2, h3, h4, h5, h6, figure {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top center;
-  max-height: 630px;
+  max-height: 530px;
   position: relative;
 }
 #fh5co-hero .flexslider .slides li:after {
@@ -333,7 +333,7 @@ h1, h2, h3, h4, h5, h6, figure {
 #fh5co-hero .flexslider .slider-text > .slider-text-inner {
   display: table-cell;
   vertical-align: middle;
-  height: 700px;
+  height: 500px;
 }
 #fh5co-hero .flexslider .slider-text > .slider-text-inner h1, #fh5co-hero .flexslider .slider-text > .slider-text-inner h2 {
   margin: 0;
@@ -375,7 +375,7 @@ h1, h2, h3, h4, h5, h6, figure {
   letter-spacing: 2px;
 }
 #fh5co-hero .flexslider .slider-text > .slider-text-inner .btn:hover {
-  background: #FEC530 !important;
+  background: #33CCCC !important;
   -webkit-box-shadow: 0px 14px 30px -15px rgba(0, 0, 0, 0.75) !important;
   -moz-box-shadow: 0px 14px 30px -15px rgba(0, 0, 0, 0.75) !important;
   box-shadow: 0px 14px 30px -15px rgba(0, 0, 0, 0.75) !important;
@@ -1854,21 +1854,21 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 .btn-primary {
-  background: #FED877;
+  background: #33CCCC;
   color: #fff;
-  border: 2px solid #FCAA2C;
+  border: 2px solid #33CCCC;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background: #FEC530 !important;
-  border-color: #FEC530 !important;
+  background: #47d1d1 !important;
+  border-color: #47d1d1 !important;
 }
 .btn-primary.btn-outline {
   background: transparent;
-  color: #FEC530;
-  border: 2px solid #FEC530;
+  color: #33CCCC;
+  border: 2px solid #33CCCC;
 }
 .btn-primary.btn-outline:hover, .btn-primary.btn-outline:focus, .btn-primary.btn-outline:active {
-  background: #FEC530;
+  background: #33CCCC;
   color: #fff;
 }
 
