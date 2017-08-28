@@ -18,8 +18,8 @@
   <meta name="twitter:url" content="" />
   <meta name="twitter:card" content="" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet">
+  <!--<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">-->
+  <!--<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet">-->
   
   <!-- Animate.css -->
   <link rel="stylesheet" href="css/animate.css">
@@ -162,64 +162,81 @@
               padding: 7px 9px;
             }
           </style>
-          <form class="form-signin" style="padding: 50px">
+          <div class="form-signin" style="padding: 50px"  id="signdiv">
             <h2 class="form-signin-heading">Welcome, please sign in </h2>
             <br>
-            <input type="text" class="form-control" placeholder="Email address">
+            <input id="emailaddr" name="emailaddr" type="text" class="form-control" placeholder="Email address">
+            <input id="password" name="password" type="password" class="form-control" placeholder="Password">
+            <label class="checkbox">
+              <a onclick=' $("#signdiv").hide(); $("#forgetpassworddiv").show();'>Forget your password?</a>
+            </label>
+            <button class="btn btn-primary btn-send-message btn-md"  style="width: 100%" onclick='signin();'>Sign in</button>
+            <button class="btn btn-default btn-send-message btn-md"  style="width: 100%" onclick='doregister();'>Register</button>
+          </div>
 
-            <input type="password" class="form-control" placeholder="Password">
+<!--          <div class="form-signin" style="padding: 50px; display: none" id="registerdiv">
+            <h2 class="form-signin-heading">Welcome, please register</h2>
+            <br>
+            <input id="username" name="username" type="text" class="form-control" placeholder="User Name">
+            <input id="emailaddr" name="emailaddr" type="text" class="form-control" placeholder="Email address">
+            <input id="mobilephone" name="mobilephone" type="text" class="form-control" placeholder="Phone">
+            <input id="password" name="password" type="password" class="form-control" placeholder="Password">
             <label class="checkbox">
               <a>Forget your password?</a>
             </label>
-            <button class="btn btn-primary btn-send-message btn-md" type="submit" style="width: 100%">Sign in</button>
-          </form>
+            <button onclick="doregister();" class="btn btn-primary btn-send-message btn-md" type="submit" style="width: 100%">Register</button>
+            <button class="btn btn-default btn-send-message btn-md"  style="width: 100%" onclick=' $("#registerdiv").hide(); $("#signdiv").show();'>Sign in</button>
+          </div>-->
+<!--verification code -->
+          <div class="form-signin" style="padding: 50px; display: none" id="verificationdiv">
+            <h2 class="form-signin-heading">Verification code</h2>
+            <br>
+            <input id="verificationcode" name="verificationcode" type="number" class="form-control" placeholder="verification code" >
+            <label class="checkbox">
+              <a>Forget your password?</a>
+            </label>
+            <button onclick="doverificationcode();" class="btn btn-primary btn-send-message btn-md" type="submit" style="width: 100%">Verify code</button>
+            <button class="btn btn-default btn-send-message btn-md"  style="width: 100%" onclick=' '>Sign in</button>
+          </div>
+<!--forget password -->
+          <div class="form-signin" style="padding: 50px; display: none" id="forgetpassworddiv">
+            <h2 class="form-signin-heading">Forgot Password</h2>
+            <br>
+            <input id="forgetpassword" name="forgetpassword" type="email" class="form-control" placeholder="Email account" >
+            <br>
+            <p>Enter the email address you used when creating the account and tap Send Password Reset Email. A message will be sent to that address containing a link to reset your password. For security reasons the link can only be used for one hour.</p>
+            <button onclick="forgetpassword();" class="btn btn-primary btn-send-message btn-md" type="submit" style="width: 100%">Send Password Reset Email</button>
+          </div>
+
+
         </div>
         <div class="col-md-2 text-center ">
 
         </div>
       </div>
-      <!--
-      <div class="row">
-        <div class="col-md-4 text-center animate-box">
-          <div class="services">
-            <span class="icon">
-              <i class="icon-heart4"></i>
-            </span>
-            <div class="desc">
-              <h3><a href="#">Heart Surgery</a></h3>
-              <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 text-center animate-box">
-          <div class="services">
-            <span class="icon">
-              <i class="icon-params"></i>
-            </span>
-            <div class="desc">
-              <h3><a href="#">General Treatment</a></h3>
-              <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 text-center animate-box">
-          <div class="services">
-            <span class="icon">
-              <i class="icon-lab2"></i>
-            </span>
-            <div class="desc">
-              <h3><a href="#">Medical Treatment</a></h3>
-              <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-            </div>
-          </div>
-        </div>
-      </div>-->
+
     </div>
   </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Verification code</h4>
+          </div>
+          <div class="modal-body">
+
+          </div>
+          <div class="modal-footer">
+
+          </div>
+        </div>
+      </div>
+    </div>
 
   <footer id="fh5co-footer" role="contentinfo"  style="background-color: #5bc0de; padding-top: 0px;">
-
     <div class="row copyright">
       <div class="col-md-12 text-center">
         <p>
@@ -237,7 +254,9 @@
   </div>
   
   <!-- jQuery -->
-  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="./js/aws-cognito-sdk.js"></script>
+  <script src="./js/amazon-cognito-identity.min.js"></script>
   <!-- jQuery Easing -->
   <script src="js/jquery.easing.1.3.js"></script>
   <!-- Bootstrap -->
@@ -263,7 +282,155 @@
   <script src="js/main.js"></script>
 
   
+  <script type="text/javascript">
+    AWSCognito.config.region = 'us-east-1'; //This is required to derive the endpoint
 
+    var cognitoUser;
+
+    var poolData = {
+      UserPoolId : 'us-east-1_59d39hLJV',
+      ClientId : '6pjngse29sg2pqd9gkiseou5tb'
+    };
+    var userPool = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserPool(poolData);
+
+    var userData = {
+      Username : $("#emailaddr").val(), // your username here
+      Pool : userPool
+    };
+
+    function doregister() {
+      var attributeList = [];
+
+      var dataEmail = {
+        Name : 'email',
+        Value : $("#emailaddr").val()
+      };
+
+      userData.Username = $("#emailaddr").val();
+//      var dataPhoneNumber = {
+//        Name : 'phone_number',
+//        Value : $("#mobilephone").val()
+//      };
+      var attributeEmail = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserAttribute(dataEmail);
+//      var attributePhoneNumber = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserAttribute(dataPhoneNumber);
+
+      attributeList.push(attributeEmail);
+//      attributeList.push(attributePhoneNumber);
+
+      userPool.signUp($("#emailaddr").val(), $("#password").val(), attributeList, null, function(err, result){
+//        $('#myModal').modal('show');
+        if (err) {
+          alert(err.message);
+
+          if(err.statusCode == 400){
+            var r=confirm("Whether or not to resend verification code?");
+            if (r==true)
+            {
+              var userData = {
+                Username : $("#emailaddr").val(), // your username here
+                Pool : userPool
+              };
+              var cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser(userData);
+              cognitoUser.resendConfirmationCode(function(err, result) {
+                if (err) {
+                  alert(err);
+                  return;
+                }
+                $("#signdiv").hide(); $("#verificationdiv").show();
+                //alert(result);
+              });
+            }
+
+          }
+          return;
+        }
+
+        if(result == null){
+
+        }else{
+          $("#signdiv").hide(); $("#verificationdiv").show();
+          cognitoUser = result.user;
+          console.log('user name is ' + cognitoUser.getUsername());
+        }
+
+      });
+
+    }
+
+    function doverificationcode() {
+//      var userData = {
+//        Username : $("#forgetpassword").val(), // your username here
+//        Pool : userPool
+//      };
+      var cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser(userData);
+
+      cognitoUser.confirmRegistration( $("#verificationcode").val(), true, function(err, result) {
+        if (err) {
+          alert(err);
+          return;
+        }
+        //$('#myModal').modal('hide');
+        if(result == "SUCCESS"){
+          alert("SUCCESS，please sign in...");
+          $("#verificationdiv").hide(); $("#signdiv").show();
+        }
+
+        console.log('call result: ' + result);
+      });
+
+    }
+
+    function signin() {
+      var authenticationData = {
+        Username : $("#emailaddr").val(), // your username here
+        Password : $("#password").val(), // your password here
+      };
+      var authenticationDetails = new AWSCognito.CognitoIdentityServiceProvider.AuthenticationDetails(authenticationData);
+
+      userData.Username = $("#emailaddr").val();
+
+      var cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser(userData);
+      cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess: function (result) {
+          console.log('access token + ' + result.getAccessToken().getJwtToken());
+          alert("SUCCESS...");
+        },
+
+        onFailure: function(err) {
+          alert(err);
+        },
+        mfaRequired: function(codeDeliveryDetails) {
+          var verificationCode = prompt('Please input verification code' ,'');
+          cognitoUser.sendMFACode(verificationCode, this);
+        }
+      });
+    }
+
+
+    function forgetpassword() {
+      var userData = {
+        Username : $("#forgetpassword").val(), // your username here
+        Pool : userPool
+      };
+      var cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser(userData);
+
+      cognitoUser.forgotPassword({
+        onSuccess: function (result) {
+          console.log('call result: ' + result);
+        },
+        onFailure: function(err) {
+          alert(err);
+        },
+        inputVerificationCode() {
+          var verificationCode = prompt('Please input verification code ' ,'');
+          var newPassword = prompt('Enter new password ' ,'');
+          cognitoUser.confirmPassword(verificationCode, newPassword, this);
+          $("#forgetpassworddiv").hide(); $("#signdiv").show();
+        }
+      });
+
+    }
+  </script>
    <!-- For demo purposes Only ( You may delete this anytime )
    <div id="colour-variations">
       <a class="option-toggle"><i class="icon-cog"></i></a>
