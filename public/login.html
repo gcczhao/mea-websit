@@ -162,6 +162,7 @@
               padding: 7px 9px;
             }
           </style>
+<!--sign in  -->
           <div class="form-signin" style="padding: 50px"  id="signdiv">
             <h2 class="form-signin-heading">Welcome, please sign in </h2>
             <br>
@@ -171,30 +172,31 @@
               <a onclick=' $("#signdiv").hide(); $("#forgetpassworddiv").show();'>Forget your password?</a>
             </label>
             <button class="btn btn-primary btn-send-message btn-md"  style="width: 100%" onclick='signin();'>Sign in</button>
-            <button class="btn btn-default btn-send-message btn-md"  style="width: 100%" onclick='doregister();'>Register</button>
+            <button class="btn btn-default btn-send-message btn-md"  style="width: 100%" onclick=' $("#signdiv").hide(); $("#registerdiv").show();'>Register</button>
           </div>
-
-<!--          <div class="form-signin" style="padding: 50px; display: none" id="registerdiv">
-            <h2 class="form-signin-heading">Welcome, please register</h2>
+<!--Registration -->
+          <div class="form-signin" style="padding: 50px; display: none" id="registerdiv">
+            <h2 class="form-signin-heading">Registration</h2>
             <br>
-            <input id="username" name="username" type="text" class="form-control" placeholder="User Name">
-            <input id="emailaddr" name="emailaddr" type="text" class="form-control" placeholder="Email address">
-            <input id="mobilephone" name="mobilephone" type="text" class="form-control" placeholder="Phone">
-            <input id="password" name="password" type="password" class="form-control" placeholder="Password">
-            <label class="checkbox">
-              <a>Forget your password?</a>
-            </label>
-            <button onclick="doregister();" class="btn btn-primary btn-send-message btn-md" type="submit" style="width: 100%">Register</button>
-            <button class="btn btn-default btn-send-message btn-md"  style="width: 100%" onclick=' $("#registerdiv").hide(); $("#signdiv").show();'>Sign in</button>
-          </div>-->
+<!--            <input id="username" name="username" type="text" class="form-control" placeholder="User Name">-->
+            <input id="emailaddrreg" name="emailaddr" type="text" class="form-control" placeholder="Email address">
+<!--            <input id="mobilephone" name="mobilephone" type="text" class="form-control" placeholder="Phone">-->
+            <input id="passwordreg" name="password" type="password" class="form-control" placeholder="Password">
+            <p class="checkbox">
+              By clicking Sign Up, I agree to MyEYECARE's <a href="./policy.html#/tos">Term of Service</a>, <a  href="./policy.html#/tops">Payments Terms of Service</a> and <a  href="./policy.html#/pp">Privacy Policy.</a>
+            </p>
+            <button onclick="doregister();" class="btn btn-primary btn-send-message btn-md" type="submit" style="width: 100%">Sign up</button>
+            <button class="btn btn-default btn-send-message btn-md"  style="width: 100%" onclick=' $("#registerdiv").hide(); $("#signdiv").show();'>Back to sign in</button>
+          </div>
 <!--verification code -->
           <div class="form-signin" style="padding: 50px; display: none" id="verificationdiv">
             <h2 class="form-signin-heading">Verification code</h2>
             <br>
+            <input id="emailaddrverification" name="emailaddr" type="text" class="form-control" placeholder="Email address" disabled="disabled">
             <input id="verificationcode" name="verificationcode" type="number" class="form-control" placeholder="verification code" >
-            <label class="checkbox">
-              <a>Forget your password?</a>
-            </label>
+            <p class="checkbox" style="text-align: left">
+              Please check inbox of your email address you used when creating the account to see the verification code, then enter here to complete the registration
+            </p>
             <button onclick="doverificationcode();" class="btn btn-primary btn-send-message btn-md" type="submit" style="width: 100%">Verify code</button>
             <button class="btn btn-default btn-send-message btn-md"  style="width: 100%" onclick=' '>Sign in</button>
           </div>
@@ -204,7 +206,7 @@
             <br>
             <input id="forgetpassword" name="forgetpassword" type="email" class="form-control" placeholder="Email account" >
             <br>
-            <p>Enter the email address you used when creating the account and tap Send Password Reset Email. A message will be sent to that address containing a link to reset your password. For security reasons the link can only be used for one hour.</p>
+            <p  style="text-align: left">Enter the email address you used when creating the account and tap Send Password Reset Email. A message will be sent to that address containing a link to reset your password. For security reasons the link can only be used for one hour.</p>
             <button onclick="forgetpassword();" class="btn btn-primary btn-send-message btn-md" type="submit" style="width: 100%">Send Password Reset Email</button>
           </div>
 
@@ -303,10 +305,10 @@
 
       var dataEmail = {
         Name : 'email',
-        Value : $("#emailaddr").val()
+        Value : $("#emailaddrreg").val()
       };
 
-      userData.Username = $("#emailaddr").val();
+      userData.Username = $("#emailaddrreg").val();
 //      var dataPhoneNumber = {
 //        Name : 'phone_number',
 //        Value : $("#mobilephone").val()
@@ -317,7 +319,7 @@
       attributeList.push(attributeEmail);
 //      attributeList.push(attributePhoneNumber);
 
-      userPool.signUp($("#emailaddr").val(), $("#password").val(), attributeList, null, function(err, result){
+      userPool.signUp($("#emailaddrreg").val(), $("#passwordreg").val(), attributeList, null, function(err, result){
 //        $('#myModal').modal('show');
         if (err) {
           alert(err.message);
@@ -327,7 +329,7 @@
             if (r==true)
             {
               var userData = {
-                Username : $("#emailaddr").val(), // your username here
+                Username : $("#emailaddrreg").val(), // your username here
                 Pool : userPool
               };
               var cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser(userData);
@@ -336,7 +338,8 @@
                   alert(err);
                   return;
                 }
-                $("#signdiv").hide(); $("#verificationdiv").show();
+                $("#registerdiv").hide(); $("#verificationdiv").show();
+                $("#emailaddrverification").val(userData.Username);
                 //alert(result);
               });
             }
@@ -348,7 +351,8 @@
         if(result == null){
 
         }else{
-          $("#signdiv").hide(); $("#verificationdiv").show();
+          $("#registerdiv").hide(); $("#verificationdiv").show();
+          $("#emailaddrverification").val(userData.Username);
           cognitoUser = result.user;
           console.log('user name is ' + cognitoUser.getUsername());
         }
@@ -373,6 +377,7 @@
         if(result == "SUCCESS"){
           alert("SUCCESS，please sign in...");
           $("#verificationdiv").hide(); $("#signdiv").show();
+          $("#emailaddrverification").val(userData.Username);
         }
 
         console.log('call result: ' + result);
